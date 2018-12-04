@@ -3,6 +3,9 @@ var rockIcon = document.querySelector(".fa-hand-rock");
 var paperIcon = document.querySelector(".fa-hand-paper");
 var scissorsIcon = document.querySelector(".fa-hand-scissors");
 var winnerDisplay = document.getElementById("winnerDisplay");
+var playerChoiceDisplay = document.getElementById("playerChoiceDisplay");
+var computerChoiceDisplay = document.getElementById("computerChoiceDisplay");
+
 var playerChoice;
 var computerChoice;
 var winner;
@@ -34,6 +37,7 @@ paperIcon.addEventListener("click", function() {
     playerChoiceDisplay.textContent = "You chose Paper!";
     paperIcon.classList.add("player-choice");
     computerChoiceRandom();
+    displayWinner();
     reset();
 });
 
