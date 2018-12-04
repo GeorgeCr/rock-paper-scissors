@@ -1,0 +1,31 @@
+body {
+    background-color: #8c7ae6;
+    text-align: center;
+}
+
+#main-game {
+    margin-top: 200px;
+}
+
+i {
+    padding: 40px;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.icons {
+    margin-bottom: 100px;
+}
+
+.big-size {
+    font-size: 70px;
+}
+
+.player-choice {
+    color: green;
+}
+
+.computer-choice {
+    color: red;
+}
+
