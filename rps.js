@@ -1,13 +1,13 @@
 var playerChoice = null;
 var computerChoice = null;
+var playerScore = 0;
+var computerScore = 0;
 var rockIcon = document.querySelector(".fa-hand-rock");
 var paperIcon = document.querySelector(".fa-hand-paper");
 var scissorsIcon = document.querySelector(".fa-hand-scissors");
 var winnerDisplay = document.getElementById("winnerDisplay");
 var playerChoiceDisplay = document.getElementById("playerChoiceDisplay");
 var computerChoiceDisplay = document.getElementById("computerChoiceDisplay");
-var playerScore = 0;
-var computerScore = 0;
 var playerScoreDisplay = document.getElementById("playerScoreDisplay");
 var computerScoreDisplay = document.getElementById("computerScoreDisplay");
 var scoreBoardDisplay = document.getElementsByClassName("scoreboard")[0];
@@ -61,11 +61,6 @@ function findWinner() {
     if ((playerChoice === 0 && computerChoice === 2) 
         || (playerChoice === 1 && computerChoice === 0) 
         || (playerChoice === 2 && computerChoice === 1)) {
-        return 0;
-    }
-    if ((playerChoice === 1 && computerChoice === 0)
-        || (playerChoice === 2 && computerChoice === 1)
-        || (playerChoice === 0 && computerChoice === 1)) {
         return 0;
     }
     //computer is winner
