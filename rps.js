@@ -10,7 +10,12 @@ var playerScore = 0;
 var computerScore = 0;
 var playerScoreDisplay = document.getElementById("playerScoreDisplay");
 var computerScoreDisplay = document.getElementById("computerScoreDisplay");
+var scoreBoardDisplay = document.getElementsByClassName("scoreboard")[0];
 
+window.setInterval(function() {
+    scoreBoardDisplay.classList.toggle("red");
+}
+, 500);
 
 //getting the player's choice
 
