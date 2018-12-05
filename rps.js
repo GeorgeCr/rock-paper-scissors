@@ -1,100 +1,121 @@
-var icons = document.querySelectorAll(".far");
+var playerChoice = null;
+var computerChoice = null;
 var rockIcon = document.querySelector(".fa-hand-rock");
 var paperIcon = document.querySelector(".fa-hand-paper");
 var scissorsIcon = document.querySelector(".fa-hand-scissors");
 var winnerDisplay = document.getElementById("winnerDisplay");
 var playerChoiceDisplay = document.getElementById("playerChoiceDisplay");
 var computerChoiceDisplay = document.getElementById("computerChoiceDisplay");
+var playerScore = 0;
+var computerScore = 0;
+var playerScoreDisplay = document.getElementById("playerScoreDisplay");
+var computerScoreDisplay = document.getElementById("computerScoreDisplay");
 
-var playerChoice;
-var computerChoice;
-var winner;
-var gameOver = false;
 
-//hover effects
-for (var i = 0; i < icons.length; i++) {
-    icons[i].addEventListener("mouseover", function() { 
-        this.classList.add("big-size");
-    });
-    icons[i].addEventListener("mouseout", function() {
-        this.classList.remove("big-size");
-    });
-}
+//getting the player's choice
 
-computerChoice = computerChoiceRandom();
-
-//displaying the user's choice
-rockIcon.addEventListener("click", function() { 
+rockIcon.addEventListener("click", function() {
     playerChoice = 0;
-    playerChoiceDisplay.textContent = "You chose Rock!";
-    rockIcon.style.color = "green";
-    computerChoiceRandom();
-    reset();
+    playerChoiceDisplay.textContent = "You chose rock."
+    computerDeal();
 });
 
 paperIcon.addEventListener("click", function() {
     playerChoice = 1;
-    playerChoiceDisplay.textContent = "You chose Paper!";
-    paperIcon.classList.add("player-choice");
-    computerChoiceRandom();
-    displayWinner();
-    reset();
+    playerChoiceDisplay.textContent = "You chose paper."
+    computerDeal();
 });
 
 scissorsIcon.addEventListener("click", function() {
     playerChoice = 2;
-    playerChoiceDisplay.textContent = "You chose Scissors!";
-    scissorsIcon.style.color = "green";
-    computerChoiceRandom();
-    reset();
+    playerChoiceDisplay.textContent = "You chose scissors."
+    computerDeal();
 });
 
-function findingWinner(player, computer) {
-    if (player === 0 && computer === 2) {
-        winner = 1;
-    } else if (player === 2 && computer === 0) {
-        winner = 2;
-    } else if (player === 1 && computer === 0) {
-        winner = 1;
-    } else if (player === 0 && computer === 1) {
-        winner = 2;
-    } else {
-        winner = 3;
-    }
-    return winner;
+//getting the player's choice
+
+//getting the computer's choice
+
+function getComputerChoice() {
+    var choice = Math.floor(Math.random() * 3);
+    return choice;
 }
 
-function computerChoiceRandom() {
-    var result = Math.floor(Math.random()*3); // 0 is rock, 1 is paper, 2 scissors
-    if (result === 0) {
-        computerChoiceDisplay.textContent = "Computer chose rock!";
-        rockIcon.classList.add("computer-choice");
-    } else 
-      if (result === 1) {
-        computerChoiceDisplay.textContent = "Computer chose paper!";
-        paperIcon.classList.add("computer-choice");
-    } else 
-      if (result === 2) {
-        computerChoiceDisplay.textContent = "Computer chose scissors!";
-        scissorsIcon.classList.add("computer-choice");
-    }
-}
+//getting the computer's choice
 
-function displayWinner() {
-    if (findingWinner(playerChoice, computerChoice) === 1) {
-        winnerDisplay.textContent = "Congratulations, you won!";
-    } else if (findingWinner(playerChoice, computerChoice) === 2) {
-        winnerDisplay.textContent = "Ouch, the computer won. Try again, maybe!?";
-    } else {
-        winnerDisplay.textContent = "It's a tie!";
+//finding a winner
+
+function findWinner() {
+    //solving the 3 ways of tie
+    if ((playerChoice === 0 && computerChoice === 0)
+        || (playerChoice === 1 && computerChoice === 1)
+        || (playerChoice === 2 && computerChoice === 2)) {
+        return 2;
+    }
+    //player is winner
+    if ((playerChoice === 0 && computerChoice === 2) 
+        || (playerChoice === 1 && computerChoice === 0) 
+        || (playerChoice === 2 && computerChoice === 1)) {
+        return 0;
+    }
+    if ((playerChoice === 1 && computerChoice === 0)
+        || (playerChoice === 2 && computerChoice === 1)
+        || (playerChoice === 0 && computerChoice === 1)) {
+        return 0;
+    }
+    //computer is winner
+    if ((playerChoice === 0 && computerChoice === 1)
+        || (playerChoice === 1 && computerChoice === 2)
+        || (playerChoice === 2 && computerChoice === 0)) {
+        return 1;
     }
 }
 
-function reset() {
-    gameOver = false;
-    playerChoiceDisplay.textContent = "";
-    computerChoiceDisplay.textContent = "";
-    playerChoice = null;
-    computerChoice = null;
-    winnerDisplay.textContent = "";
+//print out the winner
+
+function printWinner() {
+    if (findWinner() === 0) {
+        resetClasses();
+        playerScore++;
+        playerScoreDisplay.textContent = playerScore;
+        winnerDisplay.textContent = "You win!"
+        winnerDisplay.classList.add("p-win");
+
+    } else if (findWinner() === 1) {
+        resetClasses();
+        computerScore++;
+        computerScoreDisplay.textContent = computerScore;
+        winnerDisplay.textContent = "Computer won!"
+        winnerDisplay.classList.add("c-win");
+        
+    } else if (findWinner() === 2) {
+        resetClasses();
+        winnerDisplay.textContent = "It's a tie!"
+        winnerDisplay.classList.add("tie");
+        
+    }
+}
+
+function resetClasses() {
+    winnerDisplay.classList.remove("p-win", "c-win", "tie");
+}
+
+//print out the computer's choice
+
+function printComputerChoice() {
+    if (computerChoice === 0) {
+        return "Computer chose rock."
+    }
+    if (computerChoice === 1) {
+        return "Computer chose paper."
+    }
+    if (computerChoice === 2) {
+        return "Computer chose scissors."
+    }
+}
+
+function computerDeal() {
+    computerChoice = getComputerChoice();
+    computerChoiceDisplay.textContent = printComputerChoice();
+    printWinner();
 }

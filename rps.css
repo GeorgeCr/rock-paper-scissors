@@ -1,16 +1,60 @@
 body {
     background-color: #8c7ae6;
     text-align: center;
+    margin: 0;
+    font-family: 'Inconsolata', monospace;
 }
 
 #main-game {
-    margin-top: 200px;
+    margin-top: 50px;
+}
+
+h1 {
+    margin-top: 25px;
+    display: inline-block;
+}
+
+#score-poz {
+    position: absolute;
+    right: 30px;
+    top: 25px;
+    text-align: right;
+    display: inline-block;
+}
+
+span:first-of-type {
+    padding-right: 15px;
 }
 
 i {
     padding: 40px;
     font-size: 50px;
     cursor: pointer;
+}
+
+/* shaking animation found on w3schools */
+
+i:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+p {
+    font-weight: bold;
 }
 
 .icons {
@@ -22,10 +66,24 @@ i {
 }
 
 .player-choice {
-    color: green;
+    color: #44bd32;
 }
 
 .computer-choice {
-    color: red;
+    color: #e84118;
 }
 
+button {
+    margin-bottom: 30px;
+}
+
+.p-win {
+    color: #44bd32;
+}
+
+.c-win {
+    color: #e84118;
+}
+.tie {
+    color: #fbc531;
+}
